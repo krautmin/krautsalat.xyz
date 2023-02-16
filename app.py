@@ -1,12 +1,17 @@
 from flask import Flask
+from flask import render_template
+from flask_htmx import HTMX
 
 app = Flask(__name__)
+htmx = HTMX(app)
 
 
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+@app.route("/")
+def home():
+    if htmx:
+        return render_template("partials/part_index.html")
+    return render_template("index.html")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()
