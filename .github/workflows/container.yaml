@@ -7,8 +7,20 @@ on:
         required: true
       DOCKERHUB_APP_NAME:
         required: true
+      MONGO_DB:
+        required: true
+      MONGO_PORT:
+        required: true
     secrets:
       DOCKERHUB_TOKEN:
+        required: true
+      FLASK_SECRET_KEY:
+        required: true
+      MONGO_HOST:
+        required: true
+      MONGO_USERNAME:
+        required: true
+      MONGO_PASSWORD:
         required: true
   workflow_dispatch:
     push:
@@ -31,6 +43,17 @@ jobs:
         with:
           username: ${{ env.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Add Production Environment Variables to Instance
+        run: |
+          cat << EOF > .env
+          DEBUG="0"
+          FLASK_SECRET_KEY=${{ secrets.FLASK_SECRET_KEY }}
+          MONGO_DB=${{ env.MONGO_DB }}
+          MONGO_HOST=${{ secrets.MONGO_HOST }}
+          MONGO_PORT=${{ env.PORT }}
+          MONGO_USERNAME=${{ secrets.MONGO_USERNAME }}
+          MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }}
+          EOF
       - name: Build container image
         run: |
           docker build -f Dockerfile \

@@ -1,4 +1,9 @@
-FROM python:3.10.3-slim
+FROM python:3.10.9-slim
+
+USER root
+
+RUN groupadd -r flask -g 433 && \
+    useradd -u 431 -r -g flask -s /sbin/nologin -c "Docker image user" flask
 
 # copy your local files to your
 # docker container
@@ -14,10 +19,10 @@ WORKDIR /app
 # Django project runs with mysql
 # along with a few other deps
 RUN apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y \ 
     locales \
-    libmemcached-dev \ 
-    libpq-dev \ 
+    libmemcached-dev \
     libjpeg-dev \
     zlib1g-dev \
     build-essential \
@@ -34,9 +39,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# libpq-dev is a postgressql client install, change as needed
-# default-libmysqlclient-dev is a mysql client, this is our current default
-
 ENV PYTHON_VERSION=3.10
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -49,6 +51,10 @@ RUN sed -i -e 's/# de_DE.UTF-8 UTF-8/de_DE.UTF-8 UTF-8/' /etc/locale.gen \
     && locale-gen
 RUN dpkg-reconfigure locales
 
+RUN chown -hR flask /app
+
+USER flaskuser
+
 # Create a Python 3.10 virtual environment in /opt.
 # /opt: is the default location for additional software packages.
 RUN python3.10 -m venv /opt/venv
@@ -56,8 +62,16 @@ RUN python3.10 -m venv /opt/venv
 # Install requirements to new virtual environment
 # requirements.txt must have gunicorn & django
 RUN /opt/venv/bin/pip install pip --upgrade && \
-    /opt/venv/bin/pip install -r requirements.txt && \
-    chmod +x config/entrypoint.sh
+    /opt/venv/bin/pip install -r requirements.txt
 
-# entrypoint.sh to run our gunicorn instance
-CMD [ "/app/config/entrypoint.sh" ]
+# Specify the Flask environment port
+ENV PORT 5000
+
+# By default, listen on port 5000
+EXPOSE 5000
+
+# Set the directive to specify the executable that will run when the container is initiated
+ENTRYPOINT ["source /opt/venv/bin/activate"]
+
+# Specify the command to run on container start
+CMD ["waitress-serve --host localhost --port 5000 --trusted_proxy localhost --threads 8"]
