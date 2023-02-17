@@ -1,114 +1,6 @@
-### OSX ###
-.DS_Store
-.AppleDouble
-.LSOverride
+devops/
 
-# Icon must ends with two \r.
-Icon
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-
-### Python ###
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-.tox/
-.coverage
-.cache
-.pytest_cache/
-nosetests.xml
-coverage.xml
-htmlcov/
-
-# Mr Developer
-.mr.developer.cfg
-.project
-.pydevproject
-
-# Rope
-.ropeproject
-
-# Django stuff:
-*.log
-*.pot
-.media/
-
-# Sphinx documentation
-docs/_build/
-
-# npm
-node_modules/
-
-# Campass
-.sass-cache
-
-# Celery
-celerybeat-schedule
-
-# Vagrant
-.vagrant
-
-# Redis
-dump.rdb
-
-# python-dotenv
-.env
-
-# The Crowned Lion
-_docs_html/
-media/
-provisioner/site.retry
-
-# DB Schema as it gets generated on server
-database-schema.svg
-
-# Virtualenv
-venv/
-.venv/
-
-### Vim ###
-[._]*.s[a-w][a-z]
-[._]s[a-w][a-z]
-*.un~
-Session.vim
-.netrwhist
-
-# Pycharm
-.idea/
-
-.env.prod
-certs/
-devops/ansible/ansible.cfg
-devops/vars/main.yaml
-devops/ansible/vars/main.yaml
-# devops/
-db-init/
-scripts/
-.DS_Store
-keys/
-devops/tf/terraform.tfvars
-devops/tf/backend
+devops/linode/terraform/backend
 staticroot/admin/
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -164,8 +56,8 @@ coverage.xml
 .pytest_cache/
 
 # Translations
-*.pot
 *.mo
+*.pot
 
 # Django stuff:
 *.log
@@ -275,5 +167,4 @@ override.tf.json
 
 # Ignore CLI configuration files
 .terraformrc
-terraform.rc!/static/src/
-/static/src/
+terraform.rc
