@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "krautsalat-xyz"
+version = "0.1.0"
+description = ""
+authors = ["Kraut Salat <kaputkrauts@outlook.com>"]
+readme = "README.md"
+packages = [{include = "krautsalat"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiocache = "^0.12.0"
+aioconsole = "^0.6.0"
+aiofiles = "^23.1.0"
+black = "^23.1.0"
+httpx = "^0.23.3"
+hypercorn = "^0.14.3"
+marshmallow = "^3.19.0"
+motor = "^3.1.1"
+pymongo = "^4.3.3"
+python-dotenv = "^0.21.1"
+quart = "^0.18.3"
+redis = "^4.5.1"
+taskiq = "^0.1.8"
+taskiq-redis = "^0.0.4"
+webargs = "^8.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
