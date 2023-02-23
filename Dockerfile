@@ -74,4 +74,4 @@ EXPOSE 5000
 ENTRYPOINT ["source /opt/venv/bin/activate"]
 
 # Specify the command to run on container start
-CMD ["waitress-serve --host localhost --port 5000 --trusted_proxy localhost --threads 8"]
+CMD ["waitress-serve --host localhost --port 5000 --trusted_proxy localhost --url-scheme https --threads 8"]

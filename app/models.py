@@ -1,26 +1,34 @@
 import datetime
 
-from flask_mongoengine import MongoEngine
+from app import db
 
-db = MongoEngine()
+posts_collection = db.posts
 
 
-class PostModel(db.Document):
-    class TypeChoices(db.Enum):
-        NEWS = "news"
-        PROJECT = "project"
-        PAGE = "page"
+# Post API DB Model
+class PostImage(db.EmbeddedDocument):
+    image_path = db.ImageField(required=True)
+    alt_text = db.StringField(max_length=50)
 
-    class CategoryChoices(db.Enum):
-        NEWS = "news"
-        PROJECT = "project"
-        PAGE = "page"
 
-    type = db.EnumField(TypeChoices, default=TypeChoices.NEWS)
-    title = db.StringField(max_length=255, required=True)
-    subtitle = db.StringField(max_length=255)
+class PostFile(db.EmbeddedDocument):
+    file = db.FileField(required=True)
+    alt_name = db.StringField(max_length=50)
 
-    description = db.StringField(max_length=1500)
+
+class PostContent(db.EmbeddedDocument):
+    title = db.StringField(max_length=120, required=True)
+    subtitle = db.StringField(max_length=240)
+    introduction = db.StringField(max_length=1000)
     content = db.StringField()
-    frontpage = db.BooleanField(required=True, default=False)
-    pub_date = db.DateTimeField(default=datetime.datetime.now)
+    images = db.EmbeddedDocumentListField(document_type=PostImage)
+    files = db.EmbeddedDocumentListField(document_type=PostFile)
+    tags = db.ListField(field=db.StringField(max_length=30), required=True)
+
+
+class Post(db.Document):
+    post_id = db.IntField(primary_key=True)
+    content = db.EmbeddedDocumentField(document_type=PostContent, required=True)
+    date_created = db.DateTimeField(default=datetime.datetime.utcnow, required=True)
+    date_modified = db.DateTimeField(default=datetime.datetime.utcnow)
+    active = db.BooleanField(default=True, required=True)
