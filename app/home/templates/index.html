@@ -1,1030 +1,143 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="night">
-<head>
-    <meta charset="utf-8"/>
-    <meta
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-            name="viewport"
-    />
-    <title>home | krautsalat.xyz</title>
-    <meta
-            name="description"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    />
-    <link rel="icon" type="image/png" href="{{ url_for('static',filename='img/cabbage.png') }}"/>
-    <link href="{{ url_for('static',filename='css/main.css') }}" rel="stylesheet">
+{% extends "_base.html" %}
+{% block title %}home{% endblock %}
+{% block head %}
     <style>
-        .gradient {
-            background: linear-gradient(90deg, #3C8CDE 0%, #ED73A8 100%);
+        .hyphens {
+            hyphens: auto;
         }
     </style>
-</head>
-
-
-<body class="leading-normal tracking-normal text-white gradient">
-<!--Nav-->
-<nav id="header" class="fixed w-full z-30 top-0 text-white">
-    <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
-        <div class="pl-4 flex items-center font-mono">
-            <a class="" href="#">
-                landing
-            </a>
+{% endblock %}
+{% block content %}
+    <div class="w-full lg:w-3/4 container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-2 lg:py-6">
+        <div class="md:w-1/2 xl:w-1/3 text-center mx-auto px-3 lg:px-0 mb-12 lg:opacity-50 hover:opacity-100 transition transition-opacity ease-in-out duration-1000">
+            <h1 class="my-4 text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
+                Well hello there, stranger...
+            </h1>
+            <p class="leading-normal text-xl lg:text-2xl mb-8 font-mono">
+                There is not much to do at the moment, but while you're here check out the <a href="/about"
+                                                                                              class="text-primary font-bold">about</a>
+                page or take a look at the <a href="" class="text-secondary font-bold">API docs</a>.
+            </p>
         </div>
-        <div class="block lg:hidden pr-4">
-            <button id="nav-toggle"
-                    class="flex items-center p-1 text-pink-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <title>Menu</title>
-                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
-                </svg>
-            </button>
-        </div>
-        <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20"
-             id="nav-content">
-            <ul class="list-reset lg:flex justify-end flex-1 items-center">
-                <li class="mr-3">
-                    <a class="inline-block py-2 px-4 text-black font-display no-underline" href="#">Active</a>
-                </li>
-                <li class="mr-3">
-                    <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
-                       href="#">link</a>
-                </li>
-                <li class="mr-3">
-                    <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
-                       href="#">link</a>
-                </li>
-            </ul>
-            <button
-                    id="navAction"
-                    class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-            >
-                Action
-            </button>
-        </div>
-    </div>
-    <hr class="border-b border-gray-100 opacity-25 my-0 py-0"/>
-</nav>
-<div class="relative">
-    <svg viewBox="0 0 1428 174" version="1.1" xmlns="http://www.w3.org/2000/svg"
-         xmlns:xlink="http://www.w3.org/1999/xlink">
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <g transform="translate(-2.000000, 44.000000)" fill="#192428" fill-rule="nonzero">
-                <path d="M0,0 C90.7283404,0.927527913 147.912752,27.187927 291.910178,59.9119003 C387.908462,81.7278826 543.605069,89.334785 759,82.7326078 C469.336065,156.254352 216.336065,153.6679 0,74.9732496"
-                      opacity="0.100000001"></path>
-                <path
-                        d="M100,104.708498 C277.413333,72.2345949 426.147877,52.5246657 546.203633,45.5787101 C666.259389,38.6327546 810.524845,41.7979068 979,55.0741668 C931.069965,56.122511 810.303266,74.8455141 616.699903,111.243176 C423.096539,147.640838 250.863238,145.462612 100,104.708498 Z"
-                        opacity="0.100000001"
-                ></path>
-                <path d="M1046,51.6521276 C1130.83045,29.328812 1279.08318,17.607883 1439,40.1656806 L1439,120 C1271.17211,77.9435312 1140.17211,55.1609071 1046,51.6521276 Z"
-                      id="Path-4" opacity="0.200000003"></path>
-            </g>
-            <g transform="translate(-4.000000, 76.000000)" fill="#192428" fill-rule="nonzero">
-                <path
-                        d="M0.457,34.035 C57.086,53.198 98.208,65.809 123.822,71.865 C181.454,85.495 234.295,90.29 272.033,93.459 C311.355,96.759 396.635,95.801 461.025,91.663 C486.76,90.01 518.727,86.372 556.926,80.752 C595.747,74.596 622.372,70.008 636.799,66.991 C663.913,61.324 712.501,49.503 727.605,46.128 C780.47,34.317 818.839,22.532 856.324,15.904 C922.689,4.169 955.676,2.522 1011.185,0.432 C1060.705,1.477 1097.39,3.129 1121.236,5.387 C1161.703,9.219 1208.621,17.821 1235.4,22.304 C1285.855,30.748 1354.351,47.432 1440.886,72.354 L1441.191,104.352 L1.121,104.031 L0.457,34.035 Z"
-                ></path>
-            </g>
-        </g>
-    </svg>
-</div>
-
-<div id="main" class="relative">
-    <div
-            x-data="{
-    triggerNavItem(id) {
-        $scroll(id)
-    },
-    triggerMobileNavItem(id) {
-        mobileMenu = false;
-        this.triggerNavItem(id)
-    }
-}"
-    >
-        <div class="w-full z-50 top-0 py-3 sm:py-5 absolute">
-            <div class="container flex items-center justify-between">
-
-                <div class="block lg:hidden">
-                    <button @click="mobileMenu = true">
-                        <i class="bx bx-menu text-4xl text-white"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <div
-                    class="relative py-8">
-                <div
-                        class="absolute inset-0 z-20"
-                ></div>
-
-                <div class="container relative z-30">
-                    <div class="flex flex-col items-center justify-center lg:flex-row">
-                        <div class="card shadow-xl">
-                            <div class="card-body items-center justify-center font-bold">
-                                <h2 class="card-title text-9xl">Coming<br/>soon...</h2>
-                                <p>If a dog chews shoes whose shoes does he choose?</p>
+        {% for post in posts %}
+            <div class="items-center w-full mx-auto content-end rounded-lg mb-6">
+                <div class="card lg:card-side flex flex-1 border border-base-content bg-base-content bg-opacity-10 lg:bg-opacity-0 hover:bg-opacity-10 lg:grayscale hover:grayscale-0 opacity-100 lg:opacity-50 hover:opacity-100 transition transition-all ease-in-out duration-1000">
+                    <figure class="overflow-hidden w-full lg:w-1/4"><img
+                            src="{{ url_for('send_media',path='sleeping-red-panda.jpg') }}"
+                            class="object-cover min-h-full rounded-xl"
+                            alt="Album"/>
+                    </figure>
+                    <div class="card-body w-full lg:w-3/4">
+                        <h2 class="card-title text-3xl md:text-4xl font-black leading-tight">{{ post['title'] }}</h2>
+                        <hr>
+                        <p class="font-mono font-bold flex text-base-content hover:text-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                 fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                 class="w-5 h-5 mr-1 object-contain">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
+                                <path d="M16 3l0 4"></path>
+                                <path d="M8 3l0 4"></path>
+                                <path d="M4 11l16 0"></path>
+                                <path d="M11 15l1 0"></path>
+                                <path d="M12 15l0 3"></path>
+                            </svg>
+                            {{ post['created_at'].strftime('%Y-%m-%d') }}
+                            {% if post['updated_at'] %}
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="24" height="24"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-1 object-contain">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
+                                    <path d="M16 3l0 4"></path>
+                                    <path d="M8 3l0 4"></path>
+                                    <path d="M4 11l16 0"></path>
+                                    <path d="M10 16l4 0"></path>
+                                    <path d="M12 14l0 4"></path>
+                                </svg>
+                                [Update: {{ post['updated_at'].strftime('%Y-%m-%d') }}]
+                            {% endif %}</p>
+                        <p class="overflow-auto font-mono text-justify hyphens">{{ post['content']['introduction'] }}</p>
+                        <div class="card-actions mt-4 justify-between">
+                            <div class="items-start">
+                                {% for tag in post['tags'] %}
+                                    <button class="btn btn-sm btn-ghost hover:text-primary">
+                                        {{ tag }}
+                                    </button>
+                                {% endfor %}
                             </div>
-                            <figure><img src="{{ url_for('static',filename='img/sleeping-red-panda.jpg') }}"
-                                         alt="Shoes"/></figure>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-grey-50" id="about">
-                <div class="container flex flex-col items-center py-16 md:py-20 lg:flex-row">
-                    <div class="w-full text-center sm:w-3/4 lg:w-3/5 lg:text-left">
-                        <h2
-                                class="font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl"
-                        >
-                            Who am I?
-                        </h2>
-                        <h4
-                                class="pt-6 font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl"
-                        >
-                            I'm Christy Smith, a Web Designer & Photographer
-                        </h4>
-                        <p class="pt-6 font-body leading-relaxed text-grey-20">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                            occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum.
-                        </p>
-                        <div
-                                class="flex flex-col justify-center pt-6 sm:flex-row lg:justify-start"
-                        >
-                            <div class="flex items-center justify-center sm:justify-start">
-                                <p class="font-body text-lg font-semibold uppercase text-grey-20">
-                                    Connect with me
-                                </p>
-                                <div class="hidden sm:block">
-                                    <i class="bx bx-chevron-right text-2xl text-primary"></i>
-                                </div>
-                            </div>
-                            <div
-                                    class="flex items-center justify-center pt-5 pl-2 sm:justify-start sm:pt-0"
-                            >
-                                <a href="/">
-                                    <i
-                                            class="bx bxl-facebook-square text-2xl text-primary hover:text-yellow"
-                                    ></i>
-                                </a>
-                                <a href="/" class="pl-4">
-                                    <i
-                                            class="bx bxl-twitter text-2xl text-primary hover:text-yellow"
-                                    ></i>
-                                </a>
-                                <a href="/" class="pl-4">
-                                    <i
-                                            class="bx bxl-dribbble text-2xl text-primary hover:text-yellow"
-                                    ></i>
-                                </a>
-                                <a href="/" class="pl-4">
-                                    <i
-                                            class="bx bxl-linkedin text-2xl text-primary hover:text-yellow"
-                                    ></i>
-                                </a>
-                                <a href="/" class="pl-4">
-                                    <i
-                                            class="bx bxl-instagram text-2xl text-primary hover:text-yellow"
-                                    ></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full pl-0 pt-10 sm:w-3/4 lg:w-2/5 lg:pl-12 lg:pt-0">
-                        <div>
-                            <div class="flex items-end justify-between">
-                                <h4 class="font-body font-semibold uppercase text-black">
-                                    HTML & CSS
-                                </h4>
-                                <h3 class="font-body text-3xl font-bold text-primary">85%</h3>
-                            </div>
-                            <div class="mt-2 h-3 w-full rounded-full bg-lila">
-                                <div class="h-3 rounded-full bg-primary" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="pt-6">
-                            <div class="flex items-end justify-between">
-                                <h4 class="font-body font-semibold uppercase text-black">Python</h4>
-                                <h3 class="font-body text-3xl font-bold text-primary">70%</h3>
-                            </div>
-                            <div class="mt-2 h-3 w-full rounded-full bg-lila">
-                                <div class="h-3 rounded-full bg-primary" style="width: 70%"></div>
-                            </div>
-                        </div>
-                        <div class="pt-6">
-                            <div class="flex items-end justify-between">
-                                <h4 class="font-body font-semibold uppercase text-black">
-                                    Javascript
-                                </h4>
-                                <h3 class="font-body text-3xl font-bold text-primary">98%</h3>
-                            </div>
-                            <div class="mt-2 h-3 w-full rounded-full bg-lila">
-                                <div class="h-3 rounded-full bg-primary" style="width: 98%"></div>
-                            </div>
-                        </div>
-                        <div class="pt-6">
-                            <div class="flex items-end justify-between">
-                                <h4 class="font-body font-semibold uppercase text-black">Figma</h4>
-                                <h3 class="font-body text-3xl font-bold text-primary">91%</h3>
-                            </div>
-                            <div class="mt-2 h-3 w-full rounded-full bg-lila">
-                                <div class="h-3 rounded-full bg-primary" style="width: 91%"></div>
-                            </div>
+                            {% if post['content']['body'] %}
+                                <button class="btn btn-sm btn-square btn-ghost hover:text-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         class="w-5 h-5 object-contain" width="24" height="24"
+                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                         stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                        <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                        <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                    </svg>
+                                </button>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="container py-16 md:py-20" id="services">
-                <h2
-                        class="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl"
-                >
-                    Here's what I'm good at
-                </h2>
-                <h3
-                        class="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl"
-                >
-                    These are the services Ioffer
-                </h3>
-
-                <div
-                        class="grid grid-cols-1 gap-6 pt-10 sm:grid-cols-2 md:gap-10 md:pt-12 lg:grid-cols-3"
-                >
-                    <div class="group rounded px-8 py-12 shadow hover:bg-primary">
-                        <div class="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-                            <div class="hidden group-hover:block">
-                                <img
-                                        src="/assets/img/icon-development-white.svg"
-                                        alt="development icon"
-                                />
+        {% endfor %}
+        <!-- Contact Form -->
+        <div class="flex-row w-full items-center mx-auto content-end mb-6 mt-10">
+            <div class="card lg:w-1/2 mx-auto flex flex-1 border border-base-content bg-base-content bg-opacity-10 lg:bg-opacity-0 hover:bg-opacity-10 opacity-100 lg:opacity-50 hover:opacity-100 transition transition-all ease-in-out duration-1000">
+                <div class="card-body">
+                    <h2 class="card-title text-2xl md:text-3xl lg:text-4xl text-center justify-center font-black leading-tight">
+                        Send me a Message</h2>
+                    <hr>
+                    <form class="w-full lg:max-w-lg mx-auto md:p-10" method="post" action="/message">
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full lg:w-1/2 px-3 mb-6 md:mb-0">
+                                <label class="label">
+                                    <span class="label-text">First Name</span>
+                                </label>
+                                <input type="text" name="fname" id="fname"
+                                       class="input input-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full"
+                                       required/>
                             </div>
-                            <div class="block group-hover:hidden">
-                                <img
-                                        src="/assets/img/icon-development-black.svg"
-                                        alt="development icon"
-                                />
+                            <div class="w-full lg:w-1/2 px-3">
+                                <label class="label">
+                                    <span class="label-text">Last Name</span>
+                                </label>
+                                <input type="text" name="lname" id="lname"
+                                       class="input input-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full"
+                                       required/>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <h3
-                                    class="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl"
-                            >
-                                WEB DEVELOPMENT
-                            </h3>
-                            <p class="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="group rounded px-8 py-12 shadow hover:bg-primary">
-                        <div class="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-                            <div class="hidden group-hover:block">
-                                <img
-                                        src="/assets/img/icon-content-white.svg"
-                                        alt="content marketing icon"
-                                />
-                            </div>
-                            <div class="block group-hover:hidden">
-                                <img
-                                        src="/assets/img/icon-content-black.svg"
-                                        alt="content marketing icon"
-                                />
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full px-3">
+                                <label class="label">
+                                    <span class="label-text">E-Mail</span>
+                                </label>
+                                <input type="email" name="email" id="email"
+                                       class="input input-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full"
+                                       required/>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <h3
-                                    class="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl"
-                            >
-                                Technical Writing
-                            </h3>
-                            <p class="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="group rounded px-8 py-12 shadow hover:bg-primary">
-                        <div class="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-                            <div class="hidden group-hover:block">
-                                <img
-                                        src="/assets/img/icon-mobile-white.svg"
-                                        alt="Mobile Application icon"
-                                />
-                            </div>
-                            <div class="block group-hover:hidden">
-                                <img
-                                        src="/assets/img/icon-mobile-black.svg"
-                                        alt="Mobile Application icon"
-                                />
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full px-3">
+                                <label class="label">
+                                    <span class="label-text">Message</span>
+                                </label>
+                                <textarea name="message" id="message"
+                                          class="textarea textarea-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full h-96"
+                                          required></textarea>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <h3
-                                    class="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl"
-                            >
-                                Mobile Development
-                            </h3>
-                            <p class="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            </p>
+                        <div class="flex flex-wrap justify-end items-end">
+                            <input type="submit" value="submit" class="btn btn-sm btn-ghost hover:text-primary"/>
                         </div>
-                    </div>
-                    <div class="group rounded px-8 py-12 shadow hover:bg-primary">
-                        <div class="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-                            <div class="hidden group-hover:block">
-                                <img
-                                        src="/assets/img/icon-email-white.svg"
-                                        alt="Email Marketing icon"
-                                />
-                            </div>
-                            <div class="block group-hover:hidden">
-                                <img
-                                        src="/assets/img/icon-email-black.svg"
-                                        alt="Email Marketing icon"
-                                />
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <h3
-                                    class="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl"
-                            >
-                                Email Development
-                            </h3>
-                            <p class="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="group rounded px-8 py-12 shadow hover:bg-primary">
-                        <div class="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-                            <div class="hidden group-hover:block">
-                                <img
-                                        src="/assets/img/icon-design-white.svg"
-                                        alt="Theme Design icon"
-                                />
-                            </div>
-                            <div class="block group-hover:hidden">
-                                <img
-                                        src="/assets/img/icon-design-black.svg"
-                                        alt="Theme Design icon"
-                                />
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <h3
-                                    class="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl"
-                            >
-                                Graphic Design
-                            </h3>
-                            <p class="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="group rounded px-8 py-12 shadow hover:bg-primary">
-                        <div class="mx-auto h-24 w-24 text-center xl:h-28 xl:w-28">
-                            <div class="hidden group-hover:block">
-                                <img
-                                        src="/assets/img/icon-graphics-white.svg"
-                                        alt="Graphic Design icon"
-                                />
-                            </div>
-                            <div class="block group-hover:hidden">
-                                <img
-                                        src="/assets/img/icon-graphics-black.svg"
-                                        alt="Graphic Design icon"
-                                />
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <h3
-                                    class="pt-8 text-lg font-semibold uppercase text-primary group-hover:text-yellow lg:text-xl"
-                            >
-                                Web Design
-                            </h3>
-                            <p class="text-grey pt-4 text-sm group-hover:text-white md:text-base">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container py-16 md:py-20" id="portfolio">
-                <h2
-                        class="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl"
-                >
-                    Check out my Portfolio
-                </h2>
-                <h3
-                        class="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl"
-                >
-                    Here's what I have done with the past
-                </h3>
-
-                <div
-                        class="mx-auto grid w-full grid-cols-1 gap-8 pt-12 sm:w-3/4 md:gap-10 lg:w-full lg:grid-cols-2"
-                >
-                    <a
-                            href="/"
-                            class="mx-auto transform transition-all hover:scale-105 md:mx-0"
-                    >
-                        <img
-                                src="/assets/img/portfolio-apple.jpeg"
-                                class="w-full shadow"
-                                alt="portfolio image"
-                        />
-                    </a>
-                    <a
-                            href="/"
-                            class="mx-auto transform transition-all hover:scale-105 md:mx-0"
-                    >
-                        <img
-                                src="/assets/img/portfolio-stripe.jpeg"
-                                class="w-full shadow"
-                                alt="portfolio image"
-                        />
-                    </a>
-                    <a
-                            href="/"
-                            class="mx-auto transform transition-all hover:scale-105 md:mx-0"
-                    >
-                        <img
-                                src="/assets/img/portfolio-fedex.jpeg"
-                                class="w-full shadow"
-                                alt="portfolio image"
-                        />
-                    </a>
-                    <a
-                            href="/"
-                            class="mx-auto transform transition-all hover:scale-105 md:mx-0"
-                    >
-                        <img
-                                src="/assets/img/portfolio-microsoft.jpeg"
-                                class="w-full shadow"
-                                alt="portfolio image"
-                        />
-                    </a>
-                </div>
-            </div>
-
-            <div class="bg-grey-50" id="clients">
-                <div class="container py-16 md:py-20">
-                    <div class="mx-auto w-full sm:w-3/4 lg:w-full">
-                        <h2
-                                class="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl"
-                        >
-                            My latest clients
-                        </h2>
-                        <div class="flex flex-wrap items-center justify-center pt-4 sm:pt-4">
-        <span class="m-8 block">
-          <img
-                  src="/assets/img/logo-coca-cola.svg"
-                  alt="client logo"
-                  class="mx-auto block h-12 w-auto"
-          />
-        </span>
-                            <span class="m-8 block">
-          <img
-                  src="/assets/img/logo-apple.svg"
-                  alt="client logo"
-                  class="mx-auto block h-12 w-auto"
-          />
-        </span>
-
-                            <span class="m-8 block">
-          <img
-                  src="/assets/img/logo-netflix.svg"
-                  alt="client logo"
-                  class="mx-auto block h-12 w-auto"
-          />
-        </span>
-
-                            <span class="m-8 block">
-          <img
-                  src="/assets/img/logo-amazon.svg"
-                  alt="client logo"
-                  class="mx-auto block h-12 w-auto"
-          />
-        </span>
-
-                            <span class="m-8 block">
-          <img
-                  src="/assets/img/logo-stripe.svg"
-                  alt="client logo"
-                  class="mx-auto block h-12 w-auto"
-          />
-        </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container py-16 md:py-20" id="work">
-                <h2
-                        class="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl"
-                >
-                    My work experience
-                </h2>
-                <h3
-                        class="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl"
-                >
-                    Here's what I did before freelancing
-                </h3>
-
-                <div class="relative mx-auto mt-12 flex w-full flex-col lg:w-2/3">
-    <span
-            class="left-2/5 absolute inset-y-0 ml-10 hidden w-0.5 bg-grey-40 md:block"
-    ></span>
-
-                    <div class="mt-8 flex flex-col text-center md:flex-row md:text-left">
-                        <div class="md:w-2/5">
-                            <div class="flex justify-center md:justify-start">
-          <span class="shrink-0">
-            <img
-                    src="/assets/img/logo-spotify.svg"
-                    class="h-auto w-32"
-                    alt="company logo"
-            />
-          </span>
-                                <div class="relative ml-3 hidden w-full md:block">
-            <span
-                    class="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 transform bg-grey-70"
-            ></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="md:w-3/5">
-                            <div class="relative flex md:pl-18">
-          <span
-                  class="absolute left-8 top-1 hidden h-4 w-4 rounded-full border-2 border-grey-40 bg-white md:block"
-          ></span>
-
-                                <div class="mt-1 flex">
-                                    <i class="bx bxs-right-arrow hidden text-primary md:block"></i>
-                                    <div class="md:-mt-1 md:pl-8">
-              <span class="block font-body font-bold text-grey-40"
-              >Apr 2015 - Mar 2018</span
-              >
-                                        <span
-                                                class="block pt-2 font-header text-xl font-bold uppercase text-primary"
-                                        >Frontend Developer</span
-                                        >
-                                        <div class="pt-2">
-                <span class="block font-body text-black"
-                >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vestibulum mattis felis vitae risus pulvinar tincidunt. Nam ac
-                  venenatis enim.</span
-                >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-8 flex flex-col text-center md:flex-row md:text-left">
-                        <div class="md:w-2/5">
-                            <div class="flex justify-center md:justify-start">
-          <span class="shrink-0">
-            <img
-                    src="/assets/img/logo-microsoft.svg"
-                    class="h-auto w-32"
-                    alt="company logo"
-            />
-          </span>
-                                <div class="relative ml-3 hidden w-full md:block">
-            <span
-                    class="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 transform bg-grey-70"
-            ></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="md:w-3/5">
-                            <div class="relative flex md:pl-18">
-          <span
-                  class="absolute left-8 top-1 hidden h-4 w-4 rounded-full border-2 border-grey-40 bg-white md:block"
-          ></span>
-
-                                <div class="mt-1 flex">
-                                    <i class="bx bxs-right-arrow hidden text-primary md:block"></i>
-                                    <div class="md:-mt-1 md:pl-8">
-              <span class="block font-body font-bold text-grey-40"
-              >Mar 2018 - September 2019</span
-              >
-                                        <span
-                                                class="block pt-2 font-header text-xl font-bold uppercase text-primary"
-                                        >Software Engineer</span
-                                        >
-                                        <div class="pt-2">
-                <span class="block font-body text-black"
-                >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vestibulum mattis felis vitae risus pulvinar tincidunt. Nam ac
-                  venenatis enim.</span
-                >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-8 flex flex-col text-center md:flex-row md:text-left">
-                        <div class="md:w-2/5">
-                            <div class="flex justify-center md:justify-start">
-          <span class="shrink-0">
-            <img
-                    src="/assets/img/logo-fedex.svg"
-                    class="h-auto w-32"
-                    alt="company logo"
-            />
-          </span>
-                                <div class="relative ml-3 hidden w-full md:block">
-            <span
-                    class="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 transform bg-grey-70"
-            ></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="md:w-3/5">
-                            <div class="relative flex md:pl-18">
-          <span
-                  class="absolute left-8 top-1 hidden h-4 w-4 rounded-full border-2 border-grey-40 bg-white md:block"
-          ></span>
-
-                                <div class="mt-1 flex">
-                                    <i class="bx bxs-right-arrow hidden text-primary md:block"></i>
-                                    <div class="md:-mt-1 md:pl-8">
-              <span class="block font-body font-bold text-grey-40"
-              >October 2019 - Feb 2021</span
-              >
-                                        <span
-                                                class="block pt-2 font-header text-xl font-bold uppercase text-primary"
-                                        >DevOps Engineer</span
-                                        >
-                                        <div class="pt-2">
-                <span class="block font-body text-black"
-                >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vestibulum mattis felis vitae risus pulvinar tincidunt. Nam ac
-                  venenatis enim.</span
-                >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div
-                    class="bg-cover bg-top bg-no-repeat pb-16 md:py-16 lg:py-24"
-                    style="background-image: url(/assets/img/experience-figure.png)"
-                    id="statistics"
-            >
-                <div class="container">
-                    <div
-                            class="mx-auto w-5/6 bg-white py-16 shadow md:w-11/12 lg:py-20 xl:py-24 2xl:w-full"
-                    >
-                        <div class="grid grid-cols-2 gap-5 md:gap-8 xl:grid-cols-4 xl:gap-5">
-                            <div
-                                    class="flex flex-col items-center justify-center text-center md:flex-row md:text-left"
-                            >
-                                <div>
-                                    <img
-                                            src="/assets/img/icon-project.svg"
-                                            class="mx-auto h-12 w-auto md:h-20"
-                                            alt="icon project"
-                                    />
-                                </div>
-                                <div class="pt-5 md:pl-5 md:pt-0">
-                                    <h1 class="font-body text-2xl font-bold text-primary md:text-4xl">
-                                        12
-                                    </h1>
-                                    <h4
-                                            class="text-grey-dark font-header text-base font-medium leading-loose md:text-xl"
-                                    >
-                                        Finished Projects
-                                    </h4>
-                                </div>
-                            </div>
-
-                            <div
-                                    class="flex flex-col items-center justify-center text-center md:flex-row md:text-left"
-                            >
-                                <div>
-                                    <img
-                                            src="/assets/img/icon-award.svg"
-                                            class="mx-auto h-12 w-auto md:h-20"
-                                            alt="icon award"
-                                    />
-                                </div>
-                                <div class="pt-5 md:pl-5 md:pt-0">
-                                    <h1 class="font-body text-2xl font-bold text-primary md:text-4xl">
-                                        3
-                                    </h1>
-                                    <h4
-                                            class="text-grey-dark font-header text-base font-medium leading-loose md:text-xl"
-                                    >
-                                        Awards Won
-                                    </h4>
-                                </div>
-                            </div>
-
-                            <div
-                                    class="mt-6 flex flex-col items-center justify-center text-center md:mt-10 md:flex-row md:text-left lg:mt-0"
-                            >
-                                <div>
-                                    <img
-                                            src="/assets/img/icon-happy.svg"
-                                            class="mx-auto h-12 w-auto md:h-20"
-                                            alt="icon happy clients"
-                                    />
-                                </div>
-                                <div class="pt-5 md:pl-5 md:pt-0">
-                                    <h1 class="font-body text-2xl font-bold text-primary md:text-4xl">
-                                        8
-                                    </h1>
-                                    <h4
-                                            class="text-grey-dark font-header text-base font-medium leading-loose md:text-xl"
-                                    >
-                                        Happy Clients
-                                    </h4>
-                                </div>
-                            </div>
-
-                            <div
-                                    class="mt-6 flex flex-col items-center justify-center text-center md:mt-10 md:flex-row md:text-left lg:mt-0"
-                            >
-                                <div>
-                                    <img
-                                            src="/assets/img/icon-puzzle.svg"
-                                            class="mx-auto h-12 w-auto md:h-20"
-                                            alt="icon puzzle"
-                                    />
-                                </div>
-                                <div class="pt-5 md:pl-5 md:pt-0">
-                                    <h1 class="font-body text-2xl font-bold text-primary md:text-4xl">
-                                        99
-                                    </h1>
-                                    <h4
-                                            class="text-grey-dark font-header text-base font-medium leading-loose md:text-xl"
-                                    >
-                                        Bugs Fixed
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-grey-50" id="blog">
-                <div class="container py-16 md:py-20">
-                    <h2
-                            class="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl"
-                    >
-                        I also like to write
-                    </h2>
-                    <h4
-                            class="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl"
-                    >
-                        Check out my latest posts!
-                    </h4>
-                    <div
-                            class="mx-auto grid w-full grid-cols-1 gap-6 pt-12 sm:w-3/4 lg:w-full lg:grid-cols-3 xl:gap-10"
-                    >
-                        <a href="/post" class="shadow">
-                            <div
-                                    style="background-image: url(/assets/img/post-01.png)"
-                                    class="group relative h-72 bg-cover bg-center bg-no-repeat sm:h-84 lg:h-64 xl:h-72"
-                            >
-          <span
-                  class="absolute inset-0 block bg-gradient-to-b from-blog-gradient-from to-blog-gradient-to bg-cover bg-center bg-no-repeat opacity-10 transition-opacity group-hover:opacity-50"
-          ></span>
-                                <span
-                                        class="absolute right-0 bottom-0 mr-4 mb-4 block rounded-full border-2 border-white px-6 py-2 text-center font-body text-sm font-bold uppercase text-white md:text-base"
-                                >Read More</span
-                                >
-                            </div>
-                            <div class="bg-white py-6 px-5 xl:py-8">
-          <span class="block font-body text-lg font-semibold text-black"
-          >How to become a frontend developer</span
-          >
-                                <span class="block pt-2 font-body text-grey-20"
-                                >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.</span
-                                >
-                            </div>
-                        </a>
-                        <a href="/post" class="shadow">
-                            <div
-                                    style="background-image: url(/assets/img/post-02.png)"
-                                    class="group relative h-72 bg-cover bg-center bg-no-repeat sm:h-84 lg:h-64 xl:h-72"
-                            >
-          <span
-                  class="absolute inset-0 block bg-gradient-to-b from-blog-gradient-from to-blog-gradient-to bg-cover bg-center bg-no-repeat opacity-10 transition-opacity group-hover:opacity-50"
-          ></span>
-                                <span
-                                        class="absolute right-0 bottom-0 mr-4 mb-4 block rounded-full border-2 border-white px-6 py-2 text-center font-body text-sm font-bold uppercase text-white md:text-base"
-                                >Read More</span
-                                >
-                            </div>
-                            <div class="bg-white py-6 px-5 xl:py-8">
-          <span class="block font-body text-lg font-semibold text-black"
-          >My personal productivity system</span
-          >
-                                <span class="block pt-2 font-body text-grey-20"
-                                >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.</span
-                                >
-                            </div>
-                        </a>
-                        <a href="/post" class="shadow">
-                            <div
-                                    style="background-image: url(/assets/img/post-03.png)"
-                                    class="group relative h-72 bg-cover bg-center bg-no-repeat sm:h-84 lg:h-64 xl:h-72"
-                            >
-          <span
-                  class="absolute inset-0 block bg-gradient-to-b from-blog-gradient-from to-blog-gradient-to bg-cover bg-center bg-no-repeat opacity-10 transition-opacity group-hover:opacity-50"
-          ></span>
-                                <span
-                                        class="absolute right-0 bottom-0 mr-4 mb-4 block rounded-full border-2 border-white px-6 py-2 text-center font-body text-sm font-bold uppercase text-white md:text-base"
-                                >Read More</span
-                                >
-                            </div>
-                            <div class="bg-white py-6 px-5 xl:py-8">
-          <span class="block font-body text-lg font-semibold text-black"
-          >My year in review 2020</span
-          >
-                                <span class="block pt-2 font-body text-grey-20"
-                                >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.</span
-                                >
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container py-16 md:py-20" id="contact">
-                <h2
-                        class="text-center font-header text-4xl font-semibold uppercase text-primary sm:text-5xl lg:text-6xl"
-                >
-                    Here's a contact form
-                </h2>
-                <h4
-                        class="pt-6 text-center font-header text-xl font-medium text-black sm:text-2xl lg:text-3xl"
-                >
-                    Have Any Questions?
-                </h4>
-                <div class="mx-auto w-full pt-5 text-center sm:w-2/3 lg:pt-6">
-                    <p class="font-body text-grey-10">
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit hendrerit
-                        condimentum turpis nisl sem, viverra habitasse urna ante lobortis
-                        fermentum accumsan. Viverra habitasse urna ante lobortis fermentum
-                        accumsan.
-                    </p>
-                </div>
-                <form class="mx-auto w-full pt-10 sm:w-3/4">
-                    <div class="flex flex-col md:flex-row">
-                        <input
-                                class="mr-3 w-full rounded border-grey-50 px-4 py-3 font-body text-black md:w-1/2 lg:mr-5"
-                                placeholder="Name"
-                                type="text"
-                                id="name"
-                        />
-                        <input
-                                class="mt-6 w-full rounded border-grey-50 px-4 py-3 font-body text-black md:mt-0 md:ml-3 md:w-1/2 lg:ml-5"
-                                placeholder="Email"
-                                type="text"
-                                id="email"
-                        />
-                    </div>
-                    <textarea
-                            class="mt-6 w-full rounded border-grey-50 px-4 py-3 font-body text-black md:mt-8"
-                            placeholder="Message"
-                            id="message"
-                            cols="30"
-                            rows="10"
-                    ></textarea>
-                    <button
-                            class="mt-6 flex items-center justify-center rounded bg-primary px-8 py-3 font-header text-lg font-bold uppercase text-white hover:bg-grey-20"
-                    >
-                        Send
-                        <i class="bx bx-chevron-right relative -right-2 text-3xl"></i>
-                    </button>
-                </form>
-                <div class="flex flex-col pt-16 lg:flex-row">
-                    <div
-                            class="w-full border-l-2 border-t-2 border-r-2 border-b-2 border-grey-60 px-6 py-6 sm:py-8 lg:w-1/3"
-                    >
-                        <div class="flex items-center">
-                            <i class="bx bx-phone text-2xl text-grey-40"></i>
-                            <p class="pl-2 font-body font-bold uppercase text-grey-40 lg:text-lg">
-                                My Phone
-                            </p>
-                        </div>
-                        <p class="pt-2 text-left font-body font-bold text-primary lg:text-lg">
-                            (+881) 111 222 333
-                        </p>
-                    </div>
-                    <div
-                            class="w-full border-l-2 border-t-0 border-r-2 border-b-2 border-grey-60 px-6 py-6 sm:py-8 lg:w-1/3 lg:border-l-0 lg:border-t-2"
-                    >
-                        <div class="flex items-center">
-                            <i class="bx bx-envelope text-2xl text-grey-40"></i>
-                            <p class="pl-2 font-body font-bold uppercase text-grey-40 lg:text-lg">
-                                My Email
-                            </p>
-                        </div>
-                        <p class="pt-2 text-left font-body font-bold text-primary lg:text-lg">
-                            name@mydomain.com
-                        </p>
-                    </div>
-                    <div
-                            class="w-full border-l-2 border-t-0 border-r-2 border-b-2 border-grey-60 px-6 py-6 sm:py-8 lg:w-1/3 lg:border-l-0 lg:border-t-2"
-                    >
-                        <div class="flex items-center">
-                            <i class="bx bx-map text-2xl text-grey-40"></i>
-                            <p class="pl-2 font-body font-bold uppercase text-grey-40 lg:text-lg">
-                                My Address
-                            </p>
-                        </div>
-                        <p class="pt-2 text-left font-body font-bold text-primary lg:text-lg">
-                            123 New York D Block 1100, 2011 USA
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div
-                    class="h-72 bg-cover bg-center bg-no-repeat sm:h-64 md:h-72 lg:h-96"
-                    style="background-image: url(/assets/img/map.png)"
-            ></div>
-
-            <div
-                    class="relative bg-primary bg-cover bg-center bg-no-repeat py-16 bg-blend-multiply lg:py-24"
-                    style="background-image: url(/assets/img/bg-cta.jpg)"
-            >
-                <div class="container relative z-30">
-                    <h3
-                            class="text-center font-header text-3xl uppercase leading-tight tracking-wide text-white sm:text-4xl lg:text-5xl"
-                    >
-                        Keep <span class="font-bold">up-to-date</span> <br/>
-                        with what I'm up to
-                    </h3>
-                    <form class="mt-6 flex flex-col justify-center sm:flex-row">
-                        <input
-                                class="w-full rounded px-4 py-3 font-body text-black sm:w-2/5 sm:py-4 lg:w-1/3"
-                                type="text"
-                                id="email"
-                                placeholder="Give me your Email"
-                        />
-                        <button
-                                class="mt-2 rounded bg-yellow px-8 py-3 font-body text-base font-bold uppercase text-primary transition-colors hover:bg-primary hover:text-white focus:border-transparent focus:outline-none focus:ring focus:ring-yellow sm:ml-2 sm:mt-0 sm:py-4 md:text-lg"
-                        >
-                            Join the club
-                        </button>
                     </form>
                 </div>
             </div>
         </div>
-
-        <div class="bg-primary">
-            <div class="container flex flex-col justify-between py-6 sm:flex-row">
-                <p class="text-center font-body text-white md:text-left">
-                    © Copyright 2022. All right reserved, ATOM.
-                </p>
-                <div class="flex items-center justify-center pt-5 sm:justify-start sm:pt-0">
-                    <a href="/">
-                        <i
-                                class="bx bxl-facebook-square text-2xl text-white hover:text-yellow"
-                        ></i>
-                    </a>
-                    <a href="/" class="pl-4">
-                        <i class="bx bxl-twitter text-2xl text-white hover:text-yellow"></i>
-                    </a>
-                    <a href="/" class="pl-4">
-                        <i class="bx bxl-dribbble text-2xl text-white hover:text-yellow"></i>
-                    </a>
-                    <a href="/" class="pl-4">
-                        <i class="bx bxl-linkedin text-2xl text-white hover:text-yellow"></i>
-                    </a>
-                    <a href="/" class="pl-4">
-                        <i class="bx bxl-instagram text-2xl text-white hover:text-yellow"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-
     </div>
-
-    <script src="/assets/js/main.js"></script>
-
-
-</body>
-</html>
+{% endblock %}

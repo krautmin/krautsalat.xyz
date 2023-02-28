@@ -2,13 +2,14 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-import motor.motor_asyncio
+from motor.motor_asyncio import AsyncIOMotorClient
 
-from quart import Quart
+from quart import Quart, send_from_directory
+from quart_schema import QuartSchema
+from quart_session import Session
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(BASE_DIR)
 
 ENV_PATH = BASE_DIR / ".env"
 
@@ -21,16 +22,32 @@ if ENV_PATH.exists():
 
 CONFIG_TYPE = os.environ.get("CONFIG_TYPE", "config.DevConfig")
 
-client = motor.motor_asyncio.AsyncIOMotorClient(os.environ.get("MONGO_URL"))
-db = client.quart_kraut
+# Set up Motor client
+client = AsyncIOMotorClient(os.environ.get("MONGO_URL"))
+
+# Quart Extensions
+quart_schema = QuartSchema()
+sesh = Session()
 
 
 # Application Factory
 def create_app():
     app = Quart(__name__)
 
-    # Configure the flask app instance
+    # Configure the quart app instance
     app.config.from_object(CONFIG_TYPE)
+
+    @app.get("/media/<path:path>")
+    async def send_media(path):
+        """
+        :param path: a path like "posts/<int:post_id>/<filename>"
+        """
+
+        return await send_from_directory(
+            directory=app.config["UPLOAD_FOLDER"],
+            file_name=path,
+            as_attachment=True,
+        )
 
     # Register blueprints
     register_blueprints(app)
@@ -38,7 +55,7 @@ def create_app():
     # Register API docs
     register_json_api(app)
 
-    # Initialize flask extension objects
+    # Initialize quart extension objects
     initialize_extensions(app)
 
     # Configure logging
@@ -47,13 +64,20 @@ def create_app():
     # Register error handlers
     register_error_handlers(app)
 
+    try:
+        import cPickle as pickle
+    except ImportError:
+        import pickle
+    app.session_interface.serialize = pickle
+
     return app
 
 
 # Helper functions
 def register_blueprints(app):
-    from . import home
+    from . import auth, home
 
+    app.register_blueprint(auth.bp, url_prefix="/auth")
     app.register_blueprint(home.bp, url_prefix="/")
 
 
@@ -64,7 +88,8 @@ def register_json_api(app):
 
 
 def initialize_extensions(app):
-    pass
+    quart_schema.init_app(app)
+    sesh.init_app(app)
 
 
 def register_error_handlers(app):

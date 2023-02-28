@@ -3,7 +3,7 @@ import os
 
 class Config:
     SECRET_KEY = os.environ.get("FLASK_SECRET_KEY")
-    MONGODB_DB = os.environ.get("MONGO_DB", "flask_project")
+    MONGODB_DB = os.environ.get("MONGO_DB", "quart_project")
     MONGODB_HOST = os.environ.get("MONGO_HOST", "localhost")
     MONGODB_PORT = int(os.environ.get("MONGO_PORT", 27017))
     MONGODB_TZ_AWARE = False
@@ -23,6 +23,9 @@ class Config:
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     MAIL_DEFAULT_SENDER = os.environ.get("MAIL_SENDER")
+    SESSION_TYPE = "redis"
+    SESSION_URI = "redis://localhost:6379"
+    UPLOAD_FOLDER = "app/media/"
 
 
 class ProdConfig(Config):
