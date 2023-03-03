@@ -12,11 +12,11 @@ Personal (portfolio) page built with [Quart](https://github.com/pallets/quart), 
  - server-side rendering with [Jinja](https://github.com/pallets/jinja) made SPA-like with [HTMX](https://github.com/bigskysoftware/htmx)
  - simple caching implementation using [aiocache](https://github.com/aio-libs/aiocache) and Redis
  - simple authentication and user management to allow live editing
+ - distributed task queue with [arq](https://github.com/samuelcolvin/arq) and Redis
+ - simple mail integration with [aiosmtplib](https://github.com/cole/aiosmtplib)
 
 ## In Progress
  - [Editor.js](https://github.com/codex-team/editor.js) for creating posts/editing content
- - distributed task queue with [arq](https://github.com/samuelcolvin/arq) and Redis
- - simple mail integration with [aiosmtplib](https://github.com/cole/aiosmtplib)
 
 ## Planned
  - Page analytics with [plausible.io](https://github.com/plausible/analytics)
