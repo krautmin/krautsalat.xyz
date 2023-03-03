@@ -4,12 +4,12 @@ USER root
 
 # copy your local files to your
 # docker container
-COPY . /app
+COPY . /project
 
 # update your environment to work
 # within the folder you copied your 
 # files above into
-WORKDIR /app
+WORKDIR /project
 
 # os requirements to ensure this
 # Django project runs with mysql
@@ -41,15 +41,14 @@ RUN python3.10 -m venv /opt/venv
 # requirements.txt must have gunicorn & django
 RUN /opt/venv/bin/pip install pip --upgrade && \
     /opt/venv/bin/pip install -r requirements.txt && \
-    chmod +x config/entrypoint.sh
+    chmod +x config/entry_hypercorn.sh && \
+    chmod +x config/entry_arq.sh
 
-# Specify the Flask environment port
+# Specify the Quart environment port
 ENV PORT 5000
 
 # By default, listen on port 5000
 EXPOSE 5000
 
 # Specify the command to run on container start
-# ENTRYPOINT ["source /home/quartuser/venv/bin/activate"]
-
-CMD ["/app/config/entrypoint.sh"]
+CMD ["/project/config/entry_hypercorn.sh"]
