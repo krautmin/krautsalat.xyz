@@ -1,4 +1,4 @@
 bind = "0.0.0.0:5000"
 debug = false
 worker_class = "uvloop"
-workers = 6
+workers = 2

@@ -5,6 +5,7 @@ from quart_schema import DataSource, validate_request
 
 from app.documents import ContactMessageDocument, PostDocument
 from app.schemas import ContactMessage
+from app.utils import send_mail
 
 bp = Blueprint(
     "home",
@@ -28,6 +29,19 @@ async def index():
     )
 
 
+@bp.get("/media/<path:path>")
+async def send_media(path):
+    """
+    :param path: a path like "posts/<int:post_id>/<filename>"
+    """
+
+    return await send_from_directory(
+        directory=current_app.config["UPLOAD_FOLDER"],
+        file_name=path,
+        as_attachment=True,
+    )
+
+
 @bp.route("/message", methods=["POST"])
 @validate_request(ContactMessage, source=DataSource.FORM)
 async def send_message(data):
@@ -38,4 +52,8 @@ async def send_message(data):
         created_at=datetime.datetime.now(),
     )
     await message.save()
+    await send_mail(
+        subject="New message sent via krautsalat.xyz!",
+        content=f"From: {message.name}\nReply to: {message.email}\nMessage:\n'{message.message}'\nTimestamp: {message.created_at}",
+    )
     return redirect("home:index")

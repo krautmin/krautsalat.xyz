@@ -7,6 +7,13 @@ from pymongo import DESCENDING, ASCENDING, TEXT
 from slugify import slugify
 
 
+beanie_init_list = [
+    "app.documents.PostDocument",
+    "app.documents.UserDocument",
+    "app.documents.ContactMessageDocument",
+]
+
+
 class ContactMessageDocument(Document):
     name: str
     email: str

@@ -215,6 +215,7 @@ celerybeat.pid
 
 # Environments
 .env
+.env.prod
 .venv
 env/
 venv/
@@ -279,3 +280,6 @@ terraform.rc!/static/src/
 /static/src/
 
 .obsidian
+dynamic_conf.yml
+docker-compose.yml
+docker-compose.new.yml

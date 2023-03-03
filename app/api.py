@@ -1,5 +1,6 @@
 import datetime
-from uuid import uuid4
+
+from bson.json_util import dumps
 
 from quart import Blueprint
 from quart_schema import validate_request, validate_querystring
@@ -31,7 +32,7 @@ async def add_post(data):
         created_at=datetime.datetime.now(),
     )
     await document.insert()
-    return document, 201
+    return dumps(document), 201
 
 
 @bp.route("/post/update/", methods=["PUT"])

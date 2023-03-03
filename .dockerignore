@@ -106,6 +106,8 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+.env
+.env.prod
 .venv
 env/
 venv/
@@ -167,3 +169,6 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+docker-compose.yml
+docker-compose.new.yml
