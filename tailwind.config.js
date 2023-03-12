@@ -2,8 +2,8 @@
 module.exports = {
     mode: 'jit',
     content: [
-        './app/templates/*.{html,htm}',
-        './app/home/templates/*.{html,htm}',
+        './app/templates/**/*.{html,htm}',
+        './app/home/templates/**/*.{html,htm}',
     ],
     theme: {
         fontFamily: {
@@ -18,4 +18,7 @@ module.exports = {
         require('@tailwindcss/aspect-ratio'),
         require('@tailwindcss/line-clamp'),
         require('daisyui')],
+    daisyui: {
+        themes: ["dark"],
+    },
 }

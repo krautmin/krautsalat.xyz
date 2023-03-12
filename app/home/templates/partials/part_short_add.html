@@ -1,0 +1,61 @@
+<div class="modal" id="add-short-modal">
+    <div class="modal-box w-11/12 max-w-5xl">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl text-center justify-center font-black leading-tight mb-2">
+            Add a new Short</h2>
+        <hr>
+        <form class="form-control mx-auto md:p-10">
+            <div class="flex flex-wrap -mx-3 mb-6">
+                <label class="label">
+                    <span class="label-text">Title</span>
+                </label>
+                <input type="text" name="title" id="title"
+                       class="input input-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full"/>
+            </div>
+            <div class="flex flex-wrap -mx-3 mb-6">
+                <div class="w-full px-3">
+                    <label class="label">
+                        <span class="label-text">Introduction</span>
+                    </label>
+                    <textarea
+                            class="textarea textarea-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full h-96"
+                            id="introduction" name="introduction"></textarea>
+                </div>
+            </div>
+            <div class="msa-wrapper" x-data="multiselectComponent()"
+                 x-init="$watch('selected', value => selectedString = value.join(','))">
+                <label for="msa-input">Choose some cars:</label>
+                <input
+                        x-model="selectedString"
+                        type="text" id="msa-input"
+                        aria-hidden="true"
+                        x-bind:aria-expanded="listActive.toString()"
+                        aria-haspopup="tag-list"
+                        hidden>
+                <select class="select select-bordered" @click="listActive = !listActive"
+                        @click.away="listActive = false"
+                        x-bind:class="{'active': listActive}">
+                    <option x-show="selected.length == 0" disabled selected>Select Tags</option>
+                    <template x-for="(tag, index) in selected">
+                        <div class="tag-badge">
+                            <span x-text="tag"></span>
+                            <button x-bind:data-index="index" @click.stop="removeMe($event)">x</button>
+                        </div>
+                    </template>
+                    <template x-for="(tag, index, collection) in unselected">
+                        <option x-show="!selected.includes(tag)"
+                            x-bind:value="tag"
+                            x-text="tag"
+                            aria-role="button"
+                            @click.stop="addMe($event)"
+                            x-bind:data-index="index"
+                            role="option"
+                        ></option>
+                    </template>
+                </select>
+            </div>
+            <div class="flex flex-wrap justify-end items-end">
+                <input type="submit" value="Add Short" class="btn btn-sm btn-ghost hover:text-primary"/>
+            </div>
+        </form>
+    </div>
+</div>

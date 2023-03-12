@@ -1,0 +1,58 @@
+<div class="card-body" id="form-div">
+    <h2 class="card-title text-2xl md:text-3xl lg:text-4xl text-center justify-center font-black leading-tight">
+        Send me a Message</h2>
+    <hr>
+    <form class="w-full lg:max-w-lg mx-auto md:p-10" hx-post="{{ url_for('home.send_message') }}" hx-target="#form-div"
+          hx-swap="outerHTML">
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full lg:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="label">
+                    <span class="label-text">First Name</span>
+                </label>
+                <input type="text" name="fname" id="fname"
+                       class="input input-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full"
+                       required/>
+            </div>
+            <div class="w-full lg:w-1/2 px-3">
+                <label class="label">
+                    <span class="label-text">Last Name</span>
+                </label>
+                <input type="text" name="lname" id="lname"
+                       class="input input-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full"
+                       required/>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+                <label class="label">
+                    <span class="label-text">E-Mail</span>
+                </label>
+                <input type="email" name="email" id="email"
+                       class="input input-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full"
+                       required/>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3" x-data="{
+                                        message: '',
+                                        limit: $el.dataset.limit,
+                                        get remaining() {
+                                            return this.limit - this.message.length
+                                        }
+                                    }" data-limit="1000">
+                <label class="label">
+                    <span class="label-text">Message</span>
+                </label>
+                <textarea name="message" id="message" x-model="message"
+                          class="textarea textarea-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full h-96"
+                          required></textarea>
+                <label class="label">
+                    <span class="label-text-alt" id="remaining"><span x-text="remaining"></span>/1000</span>
+                </label>
+            </div>
+        </div>
+        <div class="flex flex-wrap justify-end items-end">
+            <input type="submit" value="submit" class="btn btn-sm btn-ghost hover:text-primary"/>
+        </div>
+    </form>
+</div>

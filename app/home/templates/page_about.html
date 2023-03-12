@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+{% block title %}about{% endblock %}
+{% block head %}
+    <style>
+        .hyphens {
+            hyphens: auto;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="w-full lg:w-1/2 container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-2 lg:py-6">
+        <div class="items-center mx-auto content-end rounded-lg mb-6">
+            <div class="card lg:card-side flex flex-1 border border-base-content bg-base-content bg-opacity-10 lg:bg-opacity-0 hover:bg-opacity-10 lg:grayscale hover:grayscale-0 opacity-100 lg:opacity-50 hover:opacity-100 transition transition-all ease-in-out duration-1000">
+                <div class="card-body">
+                    <h2 class="card-title text-3xl md:text-4xl font-black leading-tight">About this Site</h2>
+                    <hr>
+                    <div class="prose hyphens flex-none text-base-content">{{ markdown|safe }}</div>
+                    <div class="card-actions mt-4 justify-between"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -14,16 +14,18 @@
                 Well hello there, stranger...
             </h1>
             <p class="leading-normal text-xl lg:text-2xl mb-8 font-mono">
-                There is not much to do at the moment, but while you're here check out the <a href="/about"
-                                                                                              class="text-primary font-bold">about</a>
-                page or take a look at the <a href="" class="text-secondary font-bold">API docs</a>.
+                There is not much to do at the moment, but while you're here check out the <a
+                    href="{{ url_for('home.page_about') }}"
+                    class="text-primary font-bold">about</a>
+                page or take a look at the <a href="{{ url_for('redoc_ui') }}" class="text-secondary font-bold">API
+                docs</a>.
             </p>
         </div>
         {% for post in posts %}
             <div class="items-center w-full mx-auto content-end rounded-lg mb-6">
                 <div class="card lg:card-side flex flex-1 border border-base-content bg-base-content bg-opacity-10 lg:bg-opacity-0 hover:bg-opacity-10 lg:grayscale hover:grayscale-0 opacity-100 lg:opacity-50 hover:opacity-100 transition transition-all ease-in-out duration-1000">
                     <figure class="overflow-hidden w-full lg:w-1/4"><img
-                            src="{{ url_for('home.send_media',path='sleeping-red-panda.jpg') }}"
+                            src="{{ url_for('static',filename='img/Toucan.jpg') }}"
                             class="object-cover min-h-full rounded-xl"
                             alt="Album"/>
                     </figure>
@@ -89,54 +91,7 @@
         <!-- Contact Form -->
         <div class="flex-row w-full items-center mx-auto content-end mb-6 mt-10">
             <div class="card lg:w-1/2 mx-auto flex flex-1 border border-base-content bg-base-content bg-opacity-10 lg:bg-opacity-0 hover:bg-opacity-10 opacity-100 lg:opacity-50 hover:opacity-100 transition transition-all ease-in-out duration-1000">
-                <div class="card-body">
-                    <h2 class="card-title text-2xl md:text-3xl lg:text-4xl text-center justify-center font-black leading-tight">
-                        Send me a Message</h2>
-                    <hr>
-                    <form class="w-full lg:max-w-lg mx-auto md:p-10" method="post" action="/message">
-                        <div class="flex flex-wrap -mx-3 mb-6">
-                            <div class="w-full lg:w-1/2 px-3 mb-6 md:mb-0">
-                                <label class="label">
-                                    <span class="label-text">First Name</span>
-                                </label>
-                                <input type="text" name="fname" id="fname"
-                                       class="input input-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full"
-                                       required/>
-                            </div>
-                            <div class="w-full lg:w-1/2 px-3">
-                                <label class="label">
-                                    <span class="label-text">Last Name</span>
-                                </label>
-                                <input type="text" name="lname" id="lname"
-                                       class="input input-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full"
-                                       required/>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 mb-6">
-                            <div class="w-full px-3">
-                                <label class="label">
-                                    <span class="label-text">E-Mail</span>
-                                </label>
-                                <input type="email" name="email" id="email"
-                                       class="input input-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full"
-                                       required/>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 mb-6">
-                            <div class="w-full px-3">
-                                <label class="label">
-                                    <span class="label-text">Message</span>
-                                </label>
-                                <textarea name="message" id="message"
-                                          class="textarea textarea-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full h-96"
-                                          required></textarea>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap justify-end items-end">
-                            <input type="submit" value="submit" class="btn btn-sm btn-ghost hover:text-primary"/>
-                        </div>
-                    </form>
-                </div>
+                {% include 'partials/part_contact.html' %}
             </div>
         </div>
     </div>

@@ -2,21 +2,35 @@ import datetime
 
 from bson.json_util import dumps
 
-from quart import Blueprint
-from quart_schema import validate_request, validate_querystring
+from quart import Blueprint, request
+from quart_schema import validate_request, validate_querystring, DataSource
+from werkzeug.security import generate_password_hash
 
 from .auth import api_key_required
-from .documents import PostDocument, PostContentEmbedded
-from .schemas import (
-    PostAddSchema,
-    PostContentNested,
-    PostUpdate,
-    PostIDQuery,
-    PostMotor,
-)
+from .documents import PostDocument, UserDocument
+from .schemas import PostAddSchema, PostUpdate, PostIDQuery, PostMotor, UserBase
 
 
 bp = Blueprint("api", __name__)
+
+
+@bp.post("/user/add")
+@api_key_required
+@validate_request(UserBase)
+async def register(data):
+    if request.method == "POST":
+        uname = data.uname
+        password = data.password
+        user = UserDocument(
+            uname=uname,
+            password=generate_password_hash(password),
+            registered_at=datetime.datetime.now(),
+        )
+        if await UserDocument.find_one(UserDocument.uname == uname) is None:
+            await user.insert()
+        else:
+            return {"message": f"Username '{uname}' is already registered."}
+        return {"message": f"successfully registered user '{uname}'"}
 
 
 @bp.route("/post/add", methods=["POST"])

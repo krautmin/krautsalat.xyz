@@ -1,3 +1,4 @@
+import datetime
 import os
 from pathlib import Path
 
@@ -6,12 +7,13 @@ from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from quart import Quart
-from quart_schema import QuartSchema
+from quart_schema import Info, QuartSchema
 from quart_session import Session
 
 from app.documents import beanie_init_list
 from app.utils import get_task_queue
 
+version = "v0.2.6"
 
 base_dir = Path(__file__).resolve().parent.parent
 env_path = base_dir / ".env"
@@ -23,7 +25,11 @@ if env_path.exists():
     """
     load_dotenv(str(env_path))
 
-quart_schema = QuartSchema()
+quart_schema = QuartSchema(
+    info=Info(title="krautsalat.xyz API", version=version),
+    security=[{"token": []}],
+    security_schemes={"token": {"type": "apiKey", "name": "x-api-key", "in": "header"}},
+)
 sesh = Session()
 
 
@@ -45,6 +51,9 @@ def create_app():
     @app.before_serving
     async def init_task_queue():
         await get_task_queue()
+
+    # Register context processors
+    register_context_processors(app)
 
     # Register blueprints
     register_blueprints(app)
@@ -71,6 +80,12 @@ def create_app():
 
 
 # Helper functions
+def register_context_processors(app):
+    @app.context_processor
+    def inject_today_date():
+        return {"date": datetime.date.today()}
+
+
 def register_blueprints(app):
     from . import auth, home
 
