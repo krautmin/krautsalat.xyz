@@ -1,3 +1,4 @@
+from bson.json_util import dumps, loads
 import datetime
 import functools
 from uuid import uuid4
@@ -13,18 +14,18 @@ from quart import (
     session,
     url_for,
 )
-from quart_schema import DataSource, validate_request
-from werkzeug.security import check_password_hash, generate_password_hash
+from quart_schema import hide
+from werkzeug.security import check_password_hash
 
 from .documents import UserDocument
 from .schemas import UserBase
+from secrets import compare_digest
+
+bp = Blueprint("auth", __name__, template_folder="templates")
 
 
-bp = Blueprint("auth", __name__)
-
-
-def api_key_required(f):
-    @functools.wraps(f)
+def api_key_required(view):
+    @functools.wraps(view)
     async def decorator(*args, **kwargs):
         token = None
         # ensure the api key is passed with the headers
@@ -32,9 +33,9 @@ def api_key_required(f):
             token = request.headers["x-api-key"]
         if not token:  # throw error if no token provided
             return {"message": "A valid token is missing!"}, 401
-        elif token != current_app.config["API_KEY"]:
+        elif not compare_digest(token, current_app.config["API_KEY"]):
             return {"message": "Invalid token!"}, 401
-        return await f(*args, **kwargs)
+        return await view(*args, **kwargs)
 
     return decorator
 
@@ -57,50 +58,31 @@ async def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = await UserDocument.get(user_id)
-
-
-@bp.route("/register", methods=["GET", "POST"])
-@validate_request(UserBase, source=DataSource.FORM)
-async def register(data):
-    if request.method == "POST":
-        email = data.email
-        password = data.password
-        user = UserDocument(
-            email=email,
-            password=generate_password_hash(password),
-            registered_at=datetime.datetime.now(),
-        )
-        if await UserDocument.find_one(UserDocument.email == email) is None:
-            await user.insert()
-        else:
-            error = f"Email '{email}' is already registered."
-        await flash(error)
-
-    return render_template("auth/register.html")
+        g.user = await UserDocument.get(loads(user_id))
 
 
 @bp.route("/login", methods=["GET", "POST"])
-@validate_request(UserBase, source=DataSource.FORM)
-async def login(data: UserBase):
+@hide
+async def login():
     if request.method == "POST":
-        email = data.email
-        password = data.password
-        user = await UserDocument.find_one(UserDocument.email == email)
+        uname = (await request.form)["uname"]
+        password = (await request.form)["password"]
+        user = await UserDocument.find_one(UserDocument.uname == uname)
         if user is None:
-            error = "Incorrect email."
-        elif not check_password_hash(user["password"], password):
+            error = "Incorrect username."
+        elif not check_password_hash(user.password, password):
             error = "Incorrect password."
         else:
             session.clear()
-            session["user_id"] = user["id"]
-            return redirect(url_for("index"))
+            session["user_id"] = dumps(user.id)
+            return redirect(url_for("home.index"))
         await flash(error)
 
-    return render_template("auth/login.html")
+    return await render_template("login.html")
 
 
 @bp.route("/logout")
+@hide
 def logout():
     session.clear()
     return redirect(url_for("home.index"))

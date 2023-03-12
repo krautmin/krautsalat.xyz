@@ -1,11 +1,13 @@
 from functools import wraps
 import os
 from email.message import EmailMessage
+from typing import Any, Coroutine
 
 from aiocache import caches
 import aiosmtplib
+from aiosmtplib.response import SMTPResponse
 from arq import create_pool
-from arq.connections import RedisSettings
+from arq.connections import ArqRedis, RedisSettings
 
 from quart import current_app, g, request
 
@@ -29,7 +31,7 @@ caches.set_config(
 cache = caches.get("default")
 
 
-def aio_cache(f, timeout=60, key="view/{}"):
+def aio_cache(f, timeout: int = 60, key: str = "view/{}"):
     @wraps(f)
     async def decorator(*args, **kwargs):
         if g.user:
@@ -44,7 +46,7 @@ def aio_cache(f, timeout=60, key="view/{}"):
     return decorator
 
 
-async def get_task_queue():
+async def get_task_queue() -> Coroutine[Any, Any, ArqRedis]:
     if "arq" not in g:
         redis_conf = RedisSettings(
             host=current_app.config["CACHE_REDIS_HOST"],
@@ -57,13 +59,15 @@ async def get_task_queue():
     return await g.arq
 
 
-async def send_mail(subject, content, to=None):
+async def send_mail(
+    subject: str, content: str, to: str = None
+) -> tuple[dict[str, SMTPResponse], str]:
     email = EmailMessage()
-    email["To"] = to
-    if email["To"] is None:
+    if to is None:
         email["To"] = current_app.config["MAIL_TO"]
+    else:
+        email["To"] = to
     email["From"] = current_app.config["SMTP_USER"]
-    email["To"] = current_app.config["MAIL_TO"]
     email["Subject"] = subject
     email.set_content(content)
     return await aiosmtplib.send(

@@ -17,6 +17,9 @@ class Config:
     SMTP_USER = os.environ.get("SMTP_USER")
     SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD")
     MAIL_TO = os.environ.get("MAIL_TO")
+    QUART_SCHEMA_REDOC_JS_URL = (
+        "https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"
+    )
 
 
 class ProdConfig(Config):
@@ -26,7 +29,7 @@ class ProdConfig(Config):
     TESTING = False
     CACHE_REDIS_PASSWORD = os.environ.get("REDIS_PW", None)
     API_KEY = os.environ.get("QUART_API_KEY", None)
-    UPLOAD_FOLDER = "/app/app/media/"
+    UPLOAD_FOLDER = "/media/"
 
 
 class DevConfig(Config):

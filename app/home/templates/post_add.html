@@ -1,0 +1,129 @@
+{% extends "_base.html" %}
+{% block title %}new post{% endblock %}
+{% block head %}
+<style>
+    .hyphens {
+        hyphens: auto;
+    }
+
+    .ce-block__content,
+    .ce-toolbar__content {
+        max-width: calc(100% - 80px) !important;
+    }
+
+    .cdx-block {
+        max-width: 100% !important;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container mx-auto mt-0 px-2 py-2 lg:py-6">
+    <div class="items-center w-full mx-auto content-end rounded-lg mb-6">
+        <div
+            class="card w-full border border-base-content bg-base-content bg-opacity-10 lg:bg-opacity-0 hover:bg-opacity-10 lg:grayscale hover:grayscale-0 opacity-100 lg:opacity-50 hover:opacity-100 transition transition-all ease-in-out duration-1000">
+            <div class="card-body w-full">
+                <h2 class="card-title text-3xl md:text-4xl font-black leading-tight">Add a new Post</h2>
+                <hr>
+                <div class="prose hyphens text-base-content" id="editorjs"></div>
+                <div class="card-actions mt-4 justify-between"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/warning@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/nested-list@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/image@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/link@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/attaches@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/raw@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/underline@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/editorjs-text-alignment-blocktune@latest"></script>
+<script>
+    const editor = new EditorJS({
+        holder: 'editorjs', /**
+             * Available Tools list.
+             * Pass Tool's class or Settings object for each Tool you want to use
+             */
+        tools: {
+            header: Header,
+            delimiter: Delimiter,
+            quote: {
+                class: Quote,
+                inlineToolbar: true,
+                shortcut: 'CMD+SHIFT+O',
+                config: {
+                    quotePlaceholder: 'Enter a quote',
+                    captionPlaceholder: 'Quote\'s author',
+                },
+            },
+            warning: {
+                class: Warning,
+                inlineToolbar: true,
+                shortcut: 'CMD+SHIFT+W',
+                config: {
+                    titlePlaceholder: 'Title',
+                    messagePlaceholder: 'Message',
+                },
+            },
+            list: {
+                class: NestedList,
+                inlineToolbar: true,
+                config: {
+                    defaultStyle: 'unordered'
+                }
+            },
+            embed: Embed,
+            image: {
+                class: ImageTool,
+                config: {
+                    endpoints: {
+                        byFile: 'http://localhost:8008/uploadFile', // Your backend file uploader endpoint
+                        byUrl: 'http://localhost:8008/fetchUrl', // Your endpoint that provides uploading by Url
+                    },
+                    additionalRequestHeaders: { 'x-api-key': '<api-key>' }
+                }
+            },
+            linkblock: {
+                class: LinkTool,
+                config: {
+                    endpoint: 'http://localhost:8008/fetchUrl', // Your backend endpoint for url data fetching,
+                    headers: { 'x-api-key': '<api-key>' }
+                }
+            },
+            attaches: {
+                class: AttachesTool,
+                config: {
+                    endpoint: 'http://localhost:8008/uploadFile',
+                    additionalRequestHeaders: { 'x-api-key': '<api-key>' }
+                }
+            },
+            code: CodeTool,
+            raw: RawTool,
+            marker: Marker,
+            alignment: AlignmentBlockTune,
+            inlinecode: InlineCode,
+            underline: Underline,
+        },
+        tunes: ['alignment']
+    }
+    );
+    editor.isReady
+        .then(() => {
+            console.log('Editor.js is ready to work!')
+            /** Do anything you need after editor initialization */
+        })
+        .catch((reason) => {
+            console.log(`Editor.js initialization failed because of ${reason}`)
+        });
+</script>
+{% endblock %}

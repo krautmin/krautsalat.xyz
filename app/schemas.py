@@ -5,18 +5,22 @@ from uuid import UUID
 from pydantic import BaseModel, Field, EmailStr, SecretStr
 
 
+class HTMX(BaseModel):
+    hx_request: bool | None
+
+
 # Contact Form Schemas
 class ContactMessage(BaseModel):
     fname: str
     lname: str
     email: EmailStr
-    message: str
+    message: str = Field(..., max_length=1000)
 
 
 # User Schemas
 class UserBase(BaseModel):
-    email: EmailStr
-    password: SecretStr
+    uname: str
+    password: str
 
 
 # Post Schemas

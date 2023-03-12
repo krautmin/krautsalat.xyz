@@ -1,0 +1,40 @@
+{% extends "_base.html" %}
+{% block title %}login{% endblock %}
+{% block head %}{% endblock %}
+{% block content %}
+    <div class="w-full lg:w-3/4 container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-2 lg:py-6">
+        <!-- Login Form -->
+        <div class="flex-row w-full items-center mx-auto content-end mb-6 mt-10">
+            <div class="card lg:w-1/2 mx-auto flex flex-1 border border-base-content bg-base-content bg-opacity-10 lg:bg-opacity-0 hover:bg-opacity-10 opacity-100 lg:opacity-50 hover:opacity-100 transition transition-all ease-in-out duration-1000">
+                <div class="card-body" id="login-div">
+                    <h2 class="card-title text-2xl md:text-3xl lg:text-4xl text-center justify-center font-black leading-tight">
+                        Login</h2>
+                    <hr>
+                    <form class="w-full lg:max-w-lg mx-auto md:p-10" method="post" action="{{ url_for('auth.login') }}">
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full lg:w-1/2 px-3 mb-6 md:mb-0">
+                                <label class="label">
+                                    <span class="label-text">Username</span>
+                                </label>
+                                <input type="text" name="uname" id="uname"
+                                       class="input input-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full"
+                                       required/>
+                            </div>
+                            <div class="w-full lg:w-1/2 px-3">
+                                <label class="label">
+                                    <span class="label-text">Password</span>
+                                </label>
+                                <input type="password" name="password" id="password"
+                                       class="input input-bordered transition-none bg-base-content bg-opacity-20 text-opacity-100 w-full"
+                                       required/>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap justify-end items-end">
+                            <input type="submit" value="login" class="btn btn-sm btn-ghost hover:text-primary"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

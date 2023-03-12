@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=2.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>{% block title %}{% endblock %} // krautsalat.xyz</title>
     <meta name="description" content=""/>
@@ -13,6 +13,8 @@
           rel="stylesheet"/>
     <link rel="icon" type="image/png" href="{{ url_for('static',filename='img/cabbage.png') }}"/>
     <link href="{{ url_for('static',filename='css/main.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static',filename='js/htmx-1.8.6.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/alpine-3.11.1.min.js') }}"></script>
     <style>
         .gradient {
             background-image: linear-gradient(-225deg, #380036 0%, #0CBABA 100%);
@@ -26,7 +28,7 @@
     <div class="container w-full md:w-2/3 mx-auto flex flex-wrap md:items-center justify-between mt-0 px-2 py-2 md:py-6">
         <div class="navbar">
             <div class="flex-1 md:flex-none indicator lg:opacity-50 hover:opacity-100 transition transition-all ease-in-out duration-500">
-                <span class="indicator-item badge badge-sm badge-primary font-bold font-mono">v0.1</span>
+                <span class="indicator-item badge badge-sm badge-primary font-bold font-mono">v0.2</span>
                 <a href="{{ url_for('home.index') }}"
                    class="btn btn-square btn-ghost">
                     <img src="{{ url_for('static',filename='img/cabbage.png') }}" class="w-10 h-10"/>
@@ -39,7 +41,7 @@
             </div>
             {% if g.user %}
                 <div class="flex-none">
-                    <a href=""
+                    <a href="{{ url_for('home.post_add') }}"
                        class="btn btn-square btn-ghost m-1 lg:opacity-50 hover:opacity-100 transition transition-all ease-in-out duration-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                              stroke="currentColor" class="w-6 h-6 text-info">
@@ -90,7 +92,7 @@
                 </label>
                 <ul tabindex="0"
                     class="dropdown-content menu p-2 rounded-box w-52 font-mono border border-base-content bg-base-content bg-opacity-10 backdrop-blur-lg lg:bg-opacity-0 lg:border-opacity-50 hover:border-opacity-100 hover:bg-opacity-10 lg:opacity-50 hover:opacity-100">
-                    <li class="flex items-end"><a>
+                    <li class="flex items-end"><a href="{{ url_for('home.page_about') }}">
                         About
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-secondary" width="24"
                              height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -100,20 +102,7 @@
                             <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"></path>
                         </svg>
                     </a></li>
-                    <li class="flex items-end"><a>
-                        Projects
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-secondary"
-                             width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                             fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M15 12h.01"></path>
-                            <path d="M12 12h.01"></path>
-                            <path d="M9 12h.01"></path>
-                            <path d="M6 19a2 2 0 0 1 -2 -2v-4l-1 -1l1 -1v-4a2 2 0 0 1 2 -2"></path>
-                            <path d="M18 19a2 2 0 0 0 2 -2v-4l1 -1l-1 -1v-4a2 2 0 0 0 -2 -2"></path>
-                        </svg>
-                    </a></li>
-                    <li class="flex items-end"><a>
+                    <li class="flex items-end"><a href="{{ url_for('redoc_ui') }}">
                         API Docs
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-secondary" width="24"
                              height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -125,7 +114,7 @@
                             <path d="M9 16v-5.5a2.5 2.5 0 0 0 -5 0v5.5"></path>
                         </svg>
                     </a></li>
-                    <li class="flex items-end"><a>
+                    <li class="flex items-end"><a href="#form-div">
                         Contact
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-secondary" width="24"
                              height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -135,21 +124,8 @@
                             <path d="M3 7l9 6l9 -6"></path>
                         </svg>
                     </a></li>
-                    <li class="flex items-end"><a>
-                        Legal Notice
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-secondary" width="24"
-                             height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                             stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M13 10l7.383 7.418c.823 .82 .823 2.148 0 2.967a2.11 2.11 0 0 1 -2.976 0l-7.407 -7.385"></path>
-                            <path d="M6 9l4 4"></path>
-                            <path d="M13 10l-4 -4"></path>
-                            <path d="M3 21h7"></path>
-                            <path d="M6.793 15.793l-3.586 -3.586a1 1 0 0 1 0 -1.414l2.293 -2.293l.5 .5l3 -3l-.5 -.5l2.293 -2.293a1 1 0 0 1 1.414 0l3.586 3.586a1 1 0 0 1 0 1.414l-2.293 2.293l-.5 -.5l-3 3l.5 .5l-2.293 2.293a1 1 0 0 1 -1.414 0z"></path>
-                        </svg>
-                    </a></li>
                     {% if g.user %}
-                        <li class="flex items-end"><a>
+                        <li class="flex items-end"><a href="{{ url_for('auth.logout') }}">
                             Logout
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-secondary"
                                  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -160,7 +136,7 @@
                             </svg>
                         </a></li>
                     {% else %}
-                        <li class="flex items-end"><a>
+                        <li class="flex items-end"><a href="{{ url_for('auth.login') }}">
                             Login
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-secondary"
                                  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -223,5 +199,9 @@
     </div>
 </footer>
 {% block footer %}{% endblock %}
+{% if g.user %}
+    <script src="{{ url_for('static',filename='js/alpine-tags.js') }}"></script>
+    {% include 'partials/part_short_add.html' %}
+{% endif %}
 </body>
 </html>

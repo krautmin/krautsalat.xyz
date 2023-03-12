@@ -21,17 +21,11 @@ class ContactMessageDocument(Document):
     created_at: datetime.datetime
     send_at: Optional[datetime.datetime] = None
 
-    class Config:
-        collection = "messages"
-
 
 class UserDocument(Document):
-    email: Indexed(EmailStr, TEXT, unique=True)
-    password: SecretStr
+    uname: Indexed(str, TEXT, unique=True)
+    password: str
     registered_at: datetime.datetime
-
-    class Config:
-        collection = "users"
 
 
 class PostContentEmbedded(BaseModel):
